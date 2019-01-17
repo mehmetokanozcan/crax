@@ -22,6 +22,7 @@
         "start": "bnr start",
         "build": "bnr build",
         "clean": "rimraf ./lib",
+        "json-server": "json-server -p 4000 -d 2000 --watch src/data.json",
         "deploy": "npm run clean && npm run build"
     },
     "betterScripts": {
@@ -66,6 +67,7 @@
         "@types/node": "^10.5.1",
         "@types/react": "^16.4.5",
         "@types/react-dom": "^16.0.6",
+        "json-server": "^0.12.1",
         "babel-loader": "^8.0.0-beta",
         "better-npm-run": "0.1.1",
         "clean-webpack-plugin": "^0.1.19",

@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 import {Provider} from './krax';
 import App from './App';
 
-
 ReactDOM.render(
     <Provider>
         <App />

@@ -1,7 +1,6 @@
-import { getState } from "../krax/store";
+// import * as uuidv4 from 'uuid/v4';
 
 import {krax} from '../krax/krax'
-import {kraxFetch} from "../krax/krax-fetch";
 
 interface Todo {
     userId: number,
@@ -14,8 +13,6 @@ type TodoList = Todo[];
 
 export const add = async () =>{
     // let user:any = JSON.parse(localStorage.getItem('user') as any) || {token: 'asdasdasdasdasdasd'};
-
-
     /*krax({
         path: 'okan',
         /!*payload: {
@@ -28,45 +25,47 @@ export const add = async () =>{
         }
     })*/
 
-
     await krax<TodoList>({
         name: 'getTodos',
-        payload: kraxFetch({
-            url: 'https://jsonplaceholder.typicode.com/todos',
+        request: {
+            url: 'https://api.github.com/repos/mehmetokanozcan/react-kraxs',
             method:'GET',
             mode: 'cors',
-            body: {},
-            headers: {},
-            cache: 'no-cache',
-            redirect: '',
-            referer: '',
-            credentials: 'same-origin'
-        }) ,
+            body: {
+                name: 'poklan'
+            },
+            headers: {
+                "Content-Tyasdape": "sdfsdfsdfsdf",
+            },
+            cache: "no-cache",
+            redirect: "follow",
+            referrer: "",
+            credentials: "same-origin"
+        },
+        /*request: {
+            url: 'http://localhost:4000/pages',
+            method:'POST',
+            body: {
+                id: uuidv4(),
+                title: 'namer',
+                category: 'ahmet'
+            }
+        },*/
         onBefore: async (state:any) => {
             console.log('Before', state)
         },
-        onAfter: () => {
-            console.log('After')
-        },
-        onSuccess: () => {
+        onSuccess: (state:any) => {
             // baskaaction()
-            console.log('SUCCESS', getState());
+            console.log('SUCCESS', state);
 
         },
-        onError: () => {
+        onError: (state:any, error:any) => {
             // baskaaction()
-            // console.log('!!',actions.get());
-
-        },
-        onComplete: () => {
-            // baskaaction()
-            // console.log('!!',actions.get());
+            console.log('!!', state, error);
 
         }
 
     });
-
-
 
 
 };

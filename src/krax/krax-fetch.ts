@@ -1,14 +1,15 @@
-import {KraxResponse} from './types'
+import {KraxRequest, KraxResponse} from './types'
 import {toUpper, omit} from 'lodash'
 
 interface FetchOptions extends RequestInit {
     url: string,
 }
 
-export function kraxFetchRun<T>(options: FetchOptions): Promise<KraxResponse<T>> {
+export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
 
-    const response: Promise<KraxResponse<T>> = new Promise((resolve) => {
-        fetch(options.url, options)
+    console.log('ssss')
+    return new Promise((resolve) => {
+        fetch(options.url, omit(options,'url'))
             .then((response) => {
                 return {
                     data: response.json(),
@@ -17,59 +18,56 @@ export function kraxFetchRun<T>(options: FetchOptions): Promise<KraxResponse<T>>
                     headers: response.headers
                 }
             })
-            .then(async (val) => {
+            .then(async ({ok, statusCode, headers, data}) => {
 
-                console.log('Arg', val)
 
-                /*const responseData = await data;
-
+                const responseData = await data;
                 const kraxResponse: KraxResponse<T> = {
                     data: responseData,
-                    error: null,
                     ok,
                     statusCode,
-                    headers
-                }*/
+                    headers,
+                    message: responseData.message
+                }
 
 
-                // resolve(kraxResponse);
+                resolve(kraxResponse);
             })
             .catch((error) => {
                 const kraxResponse: KraxResponse<T> = {
-                    error,
                     ok: false,
                     data: null,
-                    statusCode: 9999
+                    statusCode: 9999,
+                    message: error.message
                 }
 
                 resolve(kraxResponse);
             })
     });
 
-    return response;
 }
 
-export function kraxFetch({url, method, mode, cache, credentials, headers, redirect, referer, body}) {
+export function kraxFetchOptions(fetchParams: KraxRequest) {
 
-    if (!url) {
-        console.warn('URL is not defined')
-        return
-    }
-
+    const {url, method, mode, cache, credentials, headers, redirect, referrer, body} = fetchParams;
     const METHOD = method ? toUpper(method) : 'GET';
     const MODE = mode ? {mode} : {};
     const CACHE = cache ? {cache} : {};
     const CREDENTIAL = credentials ? {credentials} : {};
     const REDIRECT = redirect ? {redirect} : {};
-    const REFERER = referer ? {referer} : {};
+    const REFERRER = referrer ? {referrer} : {};
     const BODY = body ? {body: JSON.stringify(body)} : {};
-    let HEADERS:object = headers ? {headers: headers} : {};
+    let HEADERS:object = headers ? headers : {};
+
+    console.log('Meytt', METHOD)
 
     HEADERS = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        ...HEADERS
-    }
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            ...HEADERS
+        }
+    };
 
     let fetchBody = {
         method: METHOD,
@@ -79,17 +77,16 @@ export function kraxFetch({url, method, mode, cache, credentials, headers, redir
         ...CACHE,
         ...CREDENTIAL,
         ...REDIRECT,
-        ...REFERER
+        ...REFERRER
     };
 
-    if (METHOD && (toUpper(METHOD) === "POST" || toUpper(METHOD) === "PUT")) {
+    if (METHOD && (toUpper(METHOD) === "DELETE" || toUpper(METHOD) === "GET")) {
         fetchBody = omit(fetchBody, 'body')
     }
 
-
     return {
         url,
-        fetchBody
+        ...fetchBody
     }
 
 }
