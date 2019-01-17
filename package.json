@@ -1,0 +1,88 @@
+{
+    "name": "react-krax",
+    "version": "0.0.1",
+    "main": "lib/index.js",
+    "keywords": [
+        "react",
+        "state",
+        "redux",
+        "context"
+    ],
+    "author": "mehmet Okan Ozcan <mail@mehmetokanozcan.com>",
+    "contributors": [
+        {
+            "name": "Mehmet Okan Ozcan",
+            "email": "mail@mehmetokanozcan.com",
+            "url": "http://mehmetokanozcan.com/"
+        }
+    ],
+    "files": [],
+    "license": "MIT",
+    "scripts": {
+        "start": "bnr start",
+        "build": "bnr build",
+        "clean": "rimraf ./lib",
+        "deploy": "npm run clean && npm run build"
+    },
+    "betterScripts": {
+        "start": {
+            "command": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback --colors",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        "build": {
+            "command": "webpack --mode production --config config/webpack.prod.config.js --progress --colors",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    },
+    "peerDependencies": {
+        "react": ">= 16.6.0 < 17",
+        "react-dom": ">= 16.6.0 < 17"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.0.0",
+        "@types/react": "16.4.14",
+        "@types/react-dom": "16.0.7",
+        "isomorphic-fetch": "^2.2.1",
+        "js-search": "^1.4.2",
+        "lodash": "^4.17.11",
+        "react": "16.6.1",
+        "react-connect-context": "^1.1.0",
+        "react-dom": "16.6.1",
+        "rimraf": "^2.6.2",
+        "uuid": "^3.3.2",
+        "webpack-node-externals": "^1.7.2",
+        "whatwg-fetch": "^3.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.0",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-stage-2": "^7.0.0",
+        "@types/js-search": "^1.4.0",
+        "@types/node": "^10.5.1",
+        "@types/react": "^16.4.5",
+        "@types/react-dom": "^16.0.6",
+        "babel-loader": "^8.0.0-beta",
+        "better-npm-run": "0.1.1",
+        "clean-webpack-plugin": "^0.1.19",
+        "copy-webpack-plugin": "^4.6.0",
+        "dotenv": "^6.0.0",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "html-webpack-plugin": "^3.2.0",
+        "source-map-loader": "^0.2.4",
+        "ts-loader": "5.2.0",
+        "tslint": "^5.11.0",
+        "tslint-config-standard": "^8.0.1",
+        "tslint-react": "^3.6.0",
+        "typescript": "^3.0.3",
+        "uglifyjs-webpack-plugin": "^2.1.1",
+        "webpack": "^4.19.1",
+        "webpack-cli": "^3.1.1",
+        "webpack-dev-server": ">=3.1.11",
+        "webpack-merge": "^4.1.4"
+    }
+}

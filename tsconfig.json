@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["es5", "es6", "dom"],
+        "noImplicitAny": false,
+//        "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types/"
+        ],
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+
+        "declaration": false,
+        "watch": true,
+        "jsx": "react",
+        "baseUrl": ""
+    },
+    "compileOnSave": true,
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        ".vscode",
+        "node_modules",
+        "dist",
+        "lib",
+        "scripts"
+    ],
+    "lib": [
+        "es6",
+        "dom"
+    ]
+}

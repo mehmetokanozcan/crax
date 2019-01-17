@@ -1,0 +1,16 @@
+{
+    "jsRules": {
+        "ordered-imports": [false],
+        "object-literal-sort-keys": [false],
+        "interface-name" : [true, "never-prefix"],
+        "no-empty-interface" : [null],
+        "member-access": [false]
+    },
+    "rules": {
+        "ordered-imports": [false],
+        "object-literal-sort-keys": [false],
+        "interface-name" : [true, "never-prefix"],
+        "no-empty-interface" : [null],
+        "member-access": [false]
+    }
+}

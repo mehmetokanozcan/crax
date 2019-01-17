@@ -1,0 +1,12 @@
+# vendors
+node_modules/
+build/
+lib/
+
+# project yarn error log
+yarn-error.log
+
+# sensitive configuration
+.env
+.idea/
+.DS_Store
