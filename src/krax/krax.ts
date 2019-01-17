@@ -12,8 +12,7 @@ const initialValue:ActionType = {
     headers: null,
     ok: false,
     statusCode: null
-
-}
+};
 
 export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
     const {request, payload} = options;
@@ -26,7 +25,11 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
     actions.set({
         ...initialValue,
         name: options.name
-    })
+    });
+
+    if (options.confirm) {
+        // ToastMessage('asdasd')
+    }
 
     if (request && !isEmpty(request) && isObject(request) && request.url) {
 
@@ -55,6 +58,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                     name: options.name,
                     loading: false,
                     payload: null,
+                    headers: data.headers,
                     ok: false,
                     message: data.message,
                     statusCode: data.statusCode
@@ -75,7 +79,6 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                     payload: payload,
                     ok: true,
                     message: '',
-                    // statusCode: 200
                 }, (ok: any) => {
                     if (ok) {
                         subs(options.name, options);

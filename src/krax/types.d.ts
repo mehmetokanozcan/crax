@@ -31,6 +31,7 @@ type ActionOptions<T> = {
     name: string,
     payload?: Partial<T>,
     request?: KraxRequest,
+    confirm?: string,
     onSuccess?: (state: any) => any,
     onBefore?: (state: any) => any,
     onError?: (state: any, error: any) => any,

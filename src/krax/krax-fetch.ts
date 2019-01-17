@@ -1,13 +1,13 @@
 import {KraxRequest, KraxResponse} from './types'
 import {toUpper, omit} from 'lodash'
+import * as fetch from 'isomorphic-fetch'
+import 'whatwg-fetch'
 
 interface FetchOptions extends RequestInit {
     url: string,
 }
 
 export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
-
-    console.log('ssss')
     return new Promise((resolve) => {
         fetch(options.url, omit(options,'url'))
             .then((response) => {
@@ -19,8 +19,6 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                 }
             })
             .then(async ({ok, statusCode, headers, data}) => {
-
-
                 const responseData = await data;
                 const kraxResponse: KraxResponse<T> = {
                     data: responseData,
@@ -28,8 +26,7 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                     statusCode,
                     headers,
                     message: responseData.message
-                }
-
+                };
 
                 resolve(kraxResponse);
             })
@@ -39,12 +36,11 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                     data: null,
                     statusCode: 9999,
                     message: error.message
-                }
+                };
 
                 resolve(kraxResponse);
             })
     });
-
 }
 
 export function kraxFetchOptions(fetchParams: KraxRequest) {
@@ -58,8 +54,6 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
     const REFERRER = referrer ? {referrer} : {};
     const BODY = body ? {body: JSON.stringify(body)} : {};
     let HEADERS:object = headers ? headers : {};
-
-    console.log('Meytt', METHOD)
 
     HEADERS = {
         headers: {

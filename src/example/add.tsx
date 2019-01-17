@@ -42,6 +42,7 @@ export const add = async () =>{
             referrer: "",
             credentials: "same-origin"
         },
+        confirm:"Emin misin",
         /*request: {
             url: 'http://localhost:4000/pages',
             method:'POST',
