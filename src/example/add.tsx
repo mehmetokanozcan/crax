@@ -1,6 +1,6 @@
 // import * as uuidv4 from 'uuid/v4';
 
-import {krax} from '../krax/krax'
+import {krax, toastMessage} from '../krax'
 
 interface Todo {
     userId: number,
@@ -9,7 +9,7 @@ interface Todo {
     completed: boolean
 }
 
-type TodoList = Todo[];
+// type TodoList = Todo;
 
 export const add = async () =>{
     // let user:any = JSON.parse(localStorage.getItem('user') as any) || {token: 'asdasdasdasdasdasd'};
@@ -25,10 +25,13 @@ export const add = async () =>{
         }
     })*/
 
-    await krax<TodoList>({
+
+
+
+    await krax<Todo>({
         name: 'getTodos',
         request: {
-            url: 'https://api.github.com/repos/mehmetokanozcan/react-kraxs',
+            url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
             method:'GET',
             mode: 'cors',
             body: {
@@ -42,7 +45,19 @@ export const add = async () =>{
             referrer: "",
             credentials: "same-origin"
         },
-        confirm:"Emin misin",
+        returnData: Todo,
+        /*payload: {
+            userId: 2342,
+            id: 234234,
+            title: 'sdfsdf',
+            completed: false
+        },*/
+        /*confirm: {
+            buttonYes: 'Onayla',
+            buttonNo: 'Kapat',
+            message: 'Bu işlemi yapmak istediğinize emin misiniz?',
+            theme: 'success'
+        },*/
         /*request: {
             url: 'http://localhost:4000/pages',
             method:'POST',
@@ -52,11 +67,28 @@ export const add = async () =>{
                 category: 'ahmet'
             }
         },*/
-        onBefore: async (state:any) => {
-            console.log('Before', state)
+        onBefore: (state:any) => {
+            console.log('Before state--', state)
+            /*const mahmut = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve('onBefore setTimeout Ends.');
+
+                }, 2000);
+            }).then((result) => {
+                console.log(result, state);
+            })
+
+            return mahmut;
+
+            setTimeout(() => {
+                console.log('onBefore setTimeout Ends.', state);
+
+            }, 5000);*/
+
         },
         onSuccess: (state:any) => {
             // baskaaction()
+            toastMessage({message: 'nabver', title: 'Başarılı', overlay: false, messageType:'error', theme:'light'})
             console.log('SUCCESS', state);
 
         },

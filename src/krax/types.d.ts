@@ -27,11 +27,18 @@ type KraxRequest = {
     window?: any;
 }
 
+type Confirm = {
+    buttonYes: string,
+    buttonNo: string,
+    message: string,
+    theme?: 'show' | 'info' | 'success' | 'error' | 'warning'
+}
+
 type ActionOptions<T> = {
     name: string,
     payload?: Partial<T>,
     request?: KraxRequest,
-    confirm?: string,
+    confirm?: Confirm,
     onSuccess?: (state: any) => any,
     onBefore?: (state: any) => any,
     onError?: (state: any, error: any) => any,
@@ -53,5 +60,25 @@ export type ActionType = {
     message?: any,
     payload: any,
     headers: any,
+}
+
+export type Message = {
+    theme?: string,
+    icon?: string | null,
+    title?: string | null,
+    message: string,
+    confirmMessage?: Confirm,
+    position?: string,
+    progressBar?: boolean,
+    progressColor?: string,
+    close?: boolean,
+    timeout?: number,
+    overlay?: boolean,
+    overlayClose?: boolean,
+    displayMode?: number | 0,
+    target?: string | null,
+    zindex?: number,
+    maxWidth?: number | 600,
+    messageType?: string,
 }
 

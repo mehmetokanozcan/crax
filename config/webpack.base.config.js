@@ -57,6 +57,11 @@ const tsLoader = {
     }
 };
 
+const cssLoader = {
+    test: /\.css$/,
+    use: ['style-loader', 'css-loader'],
+};
+
 module.exports = {
 
     entry: entry,
@@ -68,7 +73,7 @@ module.exports = {
     ...targetnMode,
     devtool: "source-map",
     resolve: {extensions: [".ts", ".tsx", ".js", ".json"]},
-    module: {rules: [jsLoader, tsLoader]},
+    module: {rules: [jsLoader, tsLoader, cssLoader]},
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/public/index.html',
