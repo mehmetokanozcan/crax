@@ -1,5 +1,4 @@
 import * as iziToast from 'izitoast/dist/js/iziToast'
-import 'izitoast/dist/css/iziToast.css'
 import {Message} from './types'
 import {omit, isEmpty} from 'lodash'
 

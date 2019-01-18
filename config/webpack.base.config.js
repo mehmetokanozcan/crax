@@ -3,7 +3,9 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractCSS = new ExtractTextPlugin('vendor.css');
+const extractSASS = new ExtractTextPlugin('style.css');
 require('@babel/polyfill');
 
 hydrateEnvironmentConf = (env) => {
@@ -57,10 +59,28 @@ const tsLoader = {
     }
 };
 
-const cssLoader = {
+/*const cssLoader = {
     test: /\.css$/,
-    use: ['style-loader', 'css-loader'],
-};
+    // use: ['style-loader', 'css-loader'],
+    use: [
+        {
+            loader: 'style-loader',
+        },
+        {
+            loader: 'css-loader',
+            query: {
+                // modules: true,
+                sourceMap: true,
+                importLoaders: 1,
+            }
+        }
+    ]
+};*/
+
+const cssLoader = {
+        test: /\.css$/,
+        use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
+    };
 
 module.exports = {
 
@@ -73,12 +93,92 @@ module.exports = {
     ...targetnMode,
     devtool: "source-map",
     resolve: {extensions: [".ts", ".tsx", ".js", ".json"]},
-    module: {rules: [jsLoader, tsLoader, cssLoader]},
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'
+            }
+        },
+            {
+                test: /\.tsx?$/,
+                use: {
+                    loader: 'ts-loader'
+                }
+            },
+            /*{
+                test: /\.css$/,
+                use: extractCSS.extract({
+                    use: [{
+                        loader: 'css-loader',
+                        query: {
+                            modules: false,
+                            // localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    }]
+                })
+            },
+            {
+                test: /\.scss$/,
+                use: extractSASS.extract({
+                    use: [{
+                            loader: 'css-loader',
+                            query: {
+                                modules: false,
+                                sourceMap: true,
+                                importLoaders: 1,
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                includePaths: [
+                                    path.resolve(__dirname, '..', 'src/styles/'),
+                                    path.resolve(__dirname, '..', 'src/app/components/styles')
+                                ]
+                            }
+                        }
+                    ]
+                })
+            },*/
+            {
+                test: /\.css$/,
+                use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
+            }
+            /*{
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                url: false,
+                                minimize: true,
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
+            }*/
+        ]
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/public/index.html',
             filename: './index.html'
         }),
+        new ExtractTextPlugin("css/style.css"),
+        /*extractCSS,
+        extractSASS,*/
         new webpack.NamedModulesPlugin(),
         hydrateEnvironmentConf(process.env.NODE_ENV),
     ],
