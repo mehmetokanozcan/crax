@@ -5,7 +5,7 @@ export default {
             [payload.name]: <T>{
                 ...omit(payload, ['name', 'ok']),
                 loading: payload.loading,
-                message: payload.message,
+                error: payload.error,
                 payload: payload.payload,
                 statusCode: payload.statusCode
             }

@@ -25,7 +25,7 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                     ok,
                     statusCode,
                     headers,
-                    message: responseData.message
+                    error: responseData
                 };
 
                 resolve(kraxResponse);
@@ -35,7 +35,7 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                     ok: false,
                     data: null,
                     statusCode: 9999,
-                    message: error.message
+                    error: error
                 };
 
                 resolve(kraxResponse);

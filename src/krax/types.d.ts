@@ -49,7 +49,7 @@ export type KraxResponse<T> = {
     ok?: boolean,
     statusCode?: number,
     headers?: any,
-    message?: any
+    error?: any
 }
 
 export type ActionType = {
@@ -57,7 +57,7 @@ export type ActionType = {
     ok: boolean,
     statusCode?: number | null,
     loading: boolean,
-    message?: any,
+    error?: any,
     payload: any,
     headers: any,
 }
