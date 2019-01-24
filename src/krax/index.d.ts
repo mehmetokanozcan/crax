@@ -2,12 +2,16 @@
 // Project: [~OneFrameWeb~]
 // Definitions by: [~Mehmet Okan Ozcan & Mustafa Cihat Aykaş~] <[~https://github.com/mehmetokanozcan/react-krax~]>
 
+import {Message} from "./types";
+
 export = Krax;
 
 declare namespace Krax {
 
     export const Provider: any;
     export const connect: any;
+    export function toastMessage(messageOptions: Message): Promise<{ confirm: boolean }>;
+
     export function krax<T>(options: Krax.ActionOptions<T>): Promise<Krax.KraxResponse<T>> & Promise<any>;
 
     export type KraxRequest = {
@@ -26,14 +30,14 @@ declare namespace Krax {
         signal?: AbortSignal | null;
         window?: any;
     }
-    
+
     export type Confirm = {
         buttonYes: string,
         buttonNo: string,
         message: string,
         theme?: 'show' | 'info' | 'success' | 'error' | 'warning'
     }
-    
+
     export type ActionOptions<T> = {
         name: string,
         payload?: Partial<T>,
@@ -43,7 +47,7 @@ declare namespace Krax {
         onBefore?: (state: any) => any,
         onError?: (state: any, error: any) => any,
     }
-    
+
     export type KraxResponse<T> = {
         data?: T | null,
         ok?: boolean,
@@ -51,7 +55,7 @@ declare namespace Krax {
         headers?: any,
         error?: any
     }
-    
+
     export type ActionType = {
         name: string | null,
         ok: boolean,
@@ -61,7 +65,7 @@ declare namespace Krax {
         payload: any,
         headers: any,
     }
-    
+
     export type Message = {
         theme?: string,
         icon?: string | null,
@@ -81,8 +85,8 @@ declare namespace Krax {
         maxWidth?: number | 600,
         messageType?: string,
     }
-    
+
     export interface FetchOptions extends RequestInit {
         url: string,
-    }    
+    }
 }
