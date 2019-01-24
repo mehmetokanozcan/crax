@@ -1,7 +1,7 @@
-import {get, isEmpty} from 'lodash'
-import {kraxFetch, kraxFetchOptions} from './krax-fetch';
-import {actions, subscribe, getState} from './store'
-import {ActionOptions, KraxResponse, ActionType} from './types'
+import { /* get,  */isEmpty } from 'lodash'
+import { kraxFetch, kraxFetchOptions } from './krax-fetch';
+import { actions, getState } from './store'
+import { ActionOptions, KraxResponse, ActionType } from './types'
 import toastMessage from './message'
 
 const initialValue:ActionType = {
@@ -16,6 +16,8 @@ const initialValue:ActionType = {
 
 export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
     const {request, payload} = options;
+    const { onSuccess, onError } = options;
+
 
     const run = async () => {
         actions.set({
@@ -36,6 +38,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             });
         }
 
+
         if (request) {
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {
                 if (data.ok) {
@@ -49,7 +52,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                         statusCode: data.statusCode
                     }, (ok: any) => {
                         if (ok) {
-                            subs(options.name, options, true);
+                           onSuccess && onSuccess(getState());
                         }
                     });
 
@@ -65,7 +68,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                         statusCode: data.statusCode
                     }, (ok: any) => {
                         if (!ok) {
-                            subs(options.name, options, false);
+                            onError && onError({}, data.error || '');
                         }
                     });
                 }
@@ -83,7 +86,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                         ok: true,
                     }, (ok: any) => {
                         if (ok) {
-                            subs(options.name, options, true);
+                            onSuccess && onSuccess(getState());
                         }
                     });
                 } catch (e) {
@@ -95,7 +98,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                         error: 'Houston! We have a problem',
                     }, (ok: any) => {
                         if (!ok) {
-                            subs(options.name, options, false);
+                            onError && onError(getState(), e);
                         }
                     });
                 }
@@ -104,7 +107,8 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
 
         }
 
-        console.warn("Houston! We have a problem")
+        console.warn("Houston! We have a problem.");
+        console.warn("You did not specify neither request nor payload. You need to specify at least one of them.");
 
         return new Promise((resolve) => {
             resolve(true);
@@ -127,23 +131,5 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
         checkOnBefore(after);
     }
 
-
     return run();
 }
-
-function subs(name: string, options, status) {
-    subscribe((_, state) => {
-        if (get(state, name) && status) {
-            if (options.onSuccess) {
-                options.onSuccess(state)
-            }
-        }
-
-        if (get(state, name) && !status) {
-            if (options.onError) {
-                options.onError(state, get(state, name).error)
-            }
-        }
-    });
-}
-
