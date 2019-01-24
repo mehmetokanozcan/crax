@@ -1,6 +1,6 @@
 {
     "name": "react-krax",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "main": "lib/index.js",
     "keywords": [
         "react",
@@ -16,7 +16,9 @@
             "url": "http://mehmetokanozcan.com/"
         }
     ],
-    "files": [],
+    "files": [
+        "lib/index.d.ts"
+    ],
     "license": "MIT",
     "scripts": {
         "start": "bnr start",
