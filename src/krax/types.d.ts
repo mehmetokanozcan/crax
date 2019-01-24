@@ -1,15 +1,3 @@
-/*export type RequestBody =
-    string
-    | Blob
-    | ArrayBufferView
-    | ArrayBuffer
-    | FormData
-    | URLSearchParams
-    | ReadableStream
-    | object
-    | null
-    | undefined*/
-
 type KraxRequest = {
     url: string,
     body?: BodyInit | null | object;
@@ -39,9 +27,9 @@ type ActionOptions<T> = {
     payload?: Partial<T>,
     request?: KraxRequest,
     confirm?: Confirm,
-    onSuccess?: (state: any) => any,
-    onBefore?: (state: any) => any,
-    onError?: (state: any, error: any) => any,
+    onSuccess?: (state: T) => any,
+    onBefore?: (state: T) => any,
+    onError?: (state: T, error: any) => any,
 }
 
 export type KraxResponse<T> = {
@@ -80,5 +68,9 @@ export type Message = {
     zindex?: number,
     maxWidth?: number | 600,
     messageType?: string,
+}
+
+export interface FetchOptions extends RequestInit {
+    url: string,
 }
 

@@ -68,7 +68,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                         statusCode: data.statusCode
                     }, (ok: any) => {
                         if (!ok) {
-                            onError && onError({}, data.error || '');
+                            onError && onError(getState(), data.error || '');
                         }
                     });
                 }

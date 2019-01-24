@@ -1,14 +1,11 @@
-import {KraxRequest, KraxResponse} from './types'
-import {toUpper, omit} from 'lodash'
+import { KraxRequest, KraxResponse, FetchOptions } from './types'
+import { toUpper, omit } from 'lodash'
 import * as fetch from 'isomorphic-fetch'
 import 'whatwg-fetch'
 
-interface FetchOptions extends RequestInit {
-    url: string,
-}
 
 export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
-    return new Promise((resolve) => {
+    return new Promise<KraxResponse<T>>((resolve) => {
         fetch(options.url, omit(options,'url'))
             .then((response) => {
                 return {

@@ -6,6 +6,8 @@ const dotenv = require('dotenv');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('vendor.css');
 const extractSASS = new ExtractTextPlugin('style.css');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 require('@babel/polyfill');
 
 hydrateEnvironmentConf = (env) => {
@@ -180,6 +182,9 @@ module.exports = {
         /*extractCSS,
         extractSASS,*/
         new webpack.NamedModulesPlugin(),
+        new CopyWebpackPlugin([
+            { from: './src/krax/index.d.ts', to: './' }
+        ]),
         hydrateEnvironmentConf(process.env.NODE_ENV),
     ],
     optimization: {
