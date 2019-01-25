@@ -2,8 +2,6 @@
 // Project: [~OneFrameWeb~]
 // Definitions by: [~Mehmet Okan Ozcan & Mustafa Cihat Aykaş~] <[~https://github.com/mehmetokanozcan/react-krax~]>
 
-import {Message} from "./types";
-
 export = Krax;
 
 declare namespace Krax {

@@ -108,7 +108,6 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
         }
 
         if (reset) {
-            console.log('?**', reset)
             return new Promise((resolve) => {
                 actions.reset(reset);
                 resolve(reset);
