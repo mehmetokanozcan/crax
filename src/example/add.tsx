@@ -14,9 +14,9 @@ type TodoList = Todo;
 export const add = async () => {
 
     await krax<TodoList>({
-        name: 'getTodos',
+        name: 'getTodos.ahmet[0].a',
         request: {
-            url: 'http://localhost:4000/pages',
+            url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
             method:'GET',
             mode: 'cors',
             body: {
@@ -78,14 +78,11 @@ export const add = async () => {
 
     })
 
-    await krax<TodoList>({
+    /*await krax<TodoList>({
         name: 'getError',
         request: {
             url: 'https://api.github.com/repos/mehmetokanozcan/react-kraxs',
             method:'GET'
-        },
-        onError : (_state, error) => {
-            toastMessage({message:error.message})
         }
     }).then(() => {
         return krax<TodoList>({
@@ -98,10 +95,14 @@ export const add = async () => {
                 toastMessage({message:'Başarılı'})
             }
         })
-    });
+    });*/
+
+    /*await krax({
+        reset: ['getError']
+    });*/
 
     await krax<TodoList>({
-        name: 'ahmet',
+        name: 'getTodos.ahmet[1]',
         /*confirm: {
             buttonYes: 'Onayla',
             buttonNo: 'Kapat',
@@ -124,12 +125,7 @@ export const add = async () => {
 
     });
 
-    krax({
-        name: 'lan',
-        payload: {
-            a:'asdasd'
-        }
-    });
+
 
 
 };

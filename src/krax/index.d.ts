@@ -39,9 +39,10 @@ declare namespace Krax {
     }
 
     export type ActionOptions<T> = {
-        name: string,
+        name?: string,
         payload?: Partial<T>,
         request?: KraxRequest,
+        reset?: any[],
         confirm?: Confirm,
         onSuccess?: (state: any) => any,
         onBefore?: (state: any) => any,

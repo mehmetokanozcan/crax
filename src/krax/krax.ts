@@ -15,7 +15,7 @@ const initialValue:ActionType = {
 };
 
 export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
-    const {request, payload} = options;
+    const {request, payload, reset} = options;
     const { onSuccess, onError } = options;
 
 
@@ -107,6 +107,14 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
 
         }
 
+        if (reset) {
+            console.log('?**', reset)
+            return new Promise((resolve) => {
+                actions.reset(reset);
+                resolve(reset);
+            })
+        }
+
         console.warn("Houston! We have a problem.");
         console.warn("You did not specify neither request nor payload. You need to specify at least one of them.");
 
@@ -132,4 +140,12 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
     }
 
     return run();
+}
+
+export function kraxReset<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
+    actions.reset(options);
+
+    return new Promise((resolve) => {
+        resolve(true);
+    })
 }

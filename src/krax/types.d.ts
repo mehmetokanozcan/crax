@@ -23,9 +23,10 @@ type Confirm = {
 }
 
 type ActionOptions<T> = {
-    name: string,
+    name?: string,
     payload?: Partial<T>,
     request?: KraxRequest,
+    reset?:any[]
     confirm?: Confirm,
     onSuccess?: (state: T) => any,
     onBefore?: (state: T) => any,
