@@ -3,7 +3,6 @@ import { toUpper, omit } from 'lodash'
 import * as fetch from 'isomorphic-fetch'
 import 'whatwg-fetch'
 
-
 export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
     return new Promise<KraxResponse<T>>((resolve) => {
         fetch(options.url, omit(options,'url'))
@@ -42,23 +41,74 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
 
 export function kraxFetchOptions(fetchParams: KraxRequest) {
 
-    const {url, method, mode, cache, credentials, headers, redirect, referrer, body} = fetchParams;
+    const {url, method, mode, cache, credentials, headers, redirect, referrer, body, isFormWithFile, isFormWithoutFile, isJson} = fetchParams;
     const METHOD = method ? toUpper(method) : 'GET';
     const MODE = mode ? {mode} : {};
     const CACHE = cache ? {cache} : {};
     const CREDENTIAL = credentials ? {credentials} : {};
     const REDIRECT = redirect ? {redirect} : {};
     const REFERRER = referrer ? {referrer} : {};
-    const BODY = body ? {body: JSON.stringify(body)} : {};
-    let HEADERS:object = headers ? headers : {};
+    // const BODY = body ? {body: JSON.stringify(body)} : {};
+    let BODY = {};
+    let HEADERS = {};
 
-    HEADERS = {
-        headers: {
-            /*"Accept": "application/json",
-            "Content-Type": "application/json",*/
-            ...HEADERS
+    if (isJson) {
+        BODY = body ? {body: JSON.stringify(body)} : {};
+
+        HEADERS = {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                ...(headers || {})
+            }
+        };
+    }
+
+    if (isFormWithFile) {
+        const formData = new FormData();
+        if (body) {
+            Object.keys(omit(body,'files')).forEach((key:any) => {
+                formData.append(key, body[key])
+            });
+
+            if ((body as any).files.length) {
+                for (const file of (body as any).files) {
+                    formData.append('files', file, file.name);
+                }
+            }
         }
-    };
+
+        BODY = body ? {body: formData} : {};
+
+        HEADERS = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                ...(headers || {})
+            }
+        };
+    }
+
+    if (isFormWithoutFile) {
+        const formData = new FormData();
+        if (body) {
+            Object.keys(body).forEach((key:any) => {
+                formData.append(key, body[key])
+            });
+        }
+        BODY = body ? {body: formData} : {};
+
+        HEADERS = {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                ...(headers || {})
+            }
+        };
+    }
+
+    if (!isFormWithoutFile && !isFormWithFile && !isJson) {
+        BODY = body ? body : {};
+        HEADERS = headers ? headers : {};
+    }
 
     let fetchBody = {
         method: METHOD,

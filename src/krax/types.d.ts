@@ -1,18 +1,23 @@
 type KraxRequest = {
     url: string,
-    body?: BodyInit | null | object;
-    cache?: RequestCache | any;
-    credentials?: RequestCredentials;
-    headers?: HeadersInit;
-    integrity?: string;
-    keepalive?: boolean;
-    method?: string;
-    mode?: RequestMode;
-    redirect?: RequestRedirect;
-    referrer?: string;
-    referrerPolicy?: ReferrerPolicy;
-    signal?: AbortSignal | null;
-    window?: any;
+    body?: BodyInit | null | object,
+    cache?: RequestCache | any,
+    credentials?: RequestCredentials,
+    headers?: HeadersInit,
+    integrity?: string,
+    keepalive?: boolean,
+    method?: string,
+    mode?: RequestMode,
+    redirect?: RequestRedirect,
+    referrer?: string,
+    referrerPolicy?: ReferrerPolicy,
+    signal?: AbortSignal | null,
+    window?: any,
+    isJson?: boolean,
+    isFormWithFile?: boolean,
+    isFormWithoutFile?: boolean
+
+    // contentType?: 'application/x-www-form-urlencoded; charset=UTF-8' | 'multipart/form-data' | 'application/json; charset=utf-8'
 }
 
 type Confirm = {

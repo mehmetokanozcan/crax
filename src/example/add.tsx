@@ -21,8 +21,12 @@ export const add = async () => {
             url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
             method:'GET',
             mode: 'cors',
+            isJson: true,
+            isFormWithFile: true,
+            isFormWithoutFile: true,
             body: {
-                name: 'poklan'
+                name: 'poklan',
+                files: ['zsdfasdfasdf']
             },
             headers: {
                 "Content-Tyasdape": "sdfsdfsdfsdf",
