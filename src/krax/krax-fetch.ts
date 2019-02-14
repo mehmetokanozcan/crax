@@ -54,8 +54,8 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
 
     HEADERS = {
         headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
+            /*"Accept": "application/json",
+            "Content-Type": "application/json",*/
             ...HEADERS
         }
     };
