@@ -13,8 +13,6 @@ type TodoList = Todo;
 
 export const add = async () => {
 
-
-
     await krax<TodoList>({
         name: 'getTodos.ahmet[0].a',
         request: {
