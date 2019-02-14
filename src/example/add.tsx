@@ -1,6 +1,6 @@
 import * as uuidv4 from 'uuid/v4';
 
-import {krax, toastMessage} from '../krax'
+import {krax, toastMessage, getState} from '../krax'
 
 interface Todo {
     userId: number,
@@ -12,6 +12,8 @@ interface Todo {
 type TodoList = Todo;
 
 export const add = async () => {
+
+
 
     await krax<TodoList>({
         name: 'getTodos.ahmet[0].a',
@@ -126,7 +128,7 @@ export const add = async () => {
     });
 
 
-
+    console.log('----GetState', getState())
 
 };
 

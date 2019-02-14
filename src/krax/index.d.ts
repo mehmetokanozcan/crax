@@ -8,6 +8,7 @@ declare namespace Krax {
 
     export const Provider: any;
     export const connect: any;
+    export const getState: any;
     export function toastMessage(messageOptions: Message): Promise<{ confirm: boolean }>;
 
     export function krax<T>(options: Krax.ActionOptions<T>): Promise<Krax.KraxResponse<T>> & Promise<any>;
