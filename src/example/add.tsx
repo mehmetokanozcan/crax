@@ -22,11 +22,10 @@ export const add = async () => {
             method:'GET',
             mode: 'cors',
             isJson: true,
-            isFormWithFile: true,
-            isFormWithoutFile: true,
+            // isFormWithFile: true,
+            // isFormWithoutFile: true,
             body: {
-                name: 'poklan',
-                files: ['zsdfasdfasdf']
+                name: 'poklan'
             },
             headers: {
                 "Content-Tyasdape": "sdfsdfsdfsdf",
@@ -118,6 +117,9 @@ export const add = async () => {
         request: {
             url: 'http://localhost:4000/pages',
             method:'POST',
+            // isFormWithoutFile: true,
+            // isFormWithFile: true,
+            isJson: true,
             body: {
                 id: uuidv4(),
                 title: 'namer',

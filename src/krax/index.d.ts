@@ -15,19 +15,22 @@ declare namespace Krax {
 
     export type KraxRequest = {
         url: string,
-        body?: BodyInit | null | object;
-        cache?: RequestCache | any;
-        credentials?: RequestCredentials;
-        headers?: HeadersInit;
-        integrity?: string;
-        keepalive?: boolean;
-        method?: string;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        referrerPolicy?: ReferrerPolicy;
-        signal?: AbortSignal | null;
-        window?: any;
+        body?: BodyInit | null | object,
+        cache?: RequestCache | any,
+        credentials?: RequestCredentials,
+        headers?: HeadersInit,
+        integrity?: string,
+        keepalive?: boolean,
+        method?: string,
+        mode?: RequestMode,
+        redirect?: RequestRedirect,
+        referrer?: string,
+        referrerPolicy?: ReferrerPolicy,
+        signal?: AbortSignal | null,
+        window?: any,
+        isJson?: boolean,
+        isFormWithFile?: boolean,
+        isFormWithoutFile?: boolean
     }
 
     export type Confirm = {

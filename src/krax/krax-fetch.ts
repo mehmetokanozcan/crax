@@ -51,7 +51,13 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
     // const BODY = body ? {body: JSON.stringify(body)} : {};
     let BODY = {};
     let HEADERS = {};
-
+    
+    const choosenWay = (isJson ? 1 : 0) + (isFormWithFile ? 1 : 0) + (isFormWithoutFile ? 1 : 0);
+    console.log(choosenWay);
+    if (choosenWay > 1) {
+        throw new Error('KraxFetch: You can only choose one option between isJson, isFormWithFile and isFormWithoutFile!');
+    }
+    
     if (isJson) {
         BODY = body ? {body: JSON.stringify(body)} : {};
 
@@ -71,7 +77,7 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
                 formData.append(key, body[key])
             });
 
-            if ((body as any).files.length) {
+            if ((body as any).files) {
                 for (const file of (body as any).files) {
                     formData.append('files', file, file.name);
                 }
@@ -94,8 +100,11 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
             Object.keys(body).forEach((key:any) => {
                 formData.append(key, body[key])
             });
+
+            BODY = { body: formData };
+
+            console.log(formData.get('name'))
         }
-        BODY = body ? {body: formData} : {};
 
         HEADERS = {
             headers: {
