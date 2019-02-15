@@ -41,7 +41,7 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
 
 export function kraxFetchOptions(fetchParams: KraxRequest) {
 
-    const {url, method, mode, cache, credentials, headers, redirect, referrer, body, isFormWithFile, isFormWithoutFile, isJson} = fetchParams;
+    const {url, method, mode, cache, credentials, headers, redirect, referrer, body, isFile, isForm, isJson} = fetchParams;
     const METHOD = method ? toUpper(method) : 'GET';
     const MODE = mode ? {mode} : {};
     const CACHE = cache ? {cache} : {};
@@ -51,13 +51,12 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
     // const BODY = body ? {body: JSON.stringify(body)} : {};
     let BODY = {};
     let HEADERS = {};
-    
-    const choosenWay = (isJson ? 1 : 0) + (isFormWithFile ? 1 : 0) + (isFormWithoutFile ? 1 : 0);
-    console.log(choosenWay);
+
+    const choosenWay = (isJson ? 1 : 0) + (isFile ? 1 : 0) + (isForm ? 1 : 0);
     if (choosenWay > 1) {
         throw new Error('KraxFetch: You can only choose one option between isJson, isFormWithFile and isFormWithoutFile!');
     }
-    
+
     if (isJson) {
         BODY = body ? {body: JSON.stringify(body)} : {};
 
@@ -70,7 +69,7 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
         };
     }
 
-    if (isFormWithFile) {
+    if (isFile) {
         const formData = new FormData();
         if (body) {
             Object.keys(omit(body,'files')).forEach((key:any) => {
@@ -94,16 +93,13 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
         };
     }
 
-    if (isFormWithoutFile) {
-        const formData = new FormData();
+    if (isForm) {
+        const formData = new URLSearchParams();
         if (body) {
             Object.keys(body).forEach((key:any) => {
                 formData.append(key, body[key])
             });
-
             BODY = { body: formData };
-
-            console.log(formData.get('name'))
         }
 
         HEADERS = {
@@ -114,7 +110,7 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
         };
     }
 
-    if (!isFormWithoutFile && !isFormWithFile && !isJson) {
+    if (!isForm && !isFile && !isJson) {
         BODY = body ? body : {};
         HEADERS = headers ? headers : {};
     }

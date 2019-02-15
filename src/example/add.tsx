@@ -1,31 +1,32 @@
-import * as uuidv4 from 'uuid/v4';
+// import * as uuidv4 from 'uuid/v4';
 
-import {krax, toastMessage, getState} from '../krax'
+import {krax, /*toastMessage, getState*/} from '../krax'
 
-interface Todo {
-    userId: number,
-    id: number,
-    title: string,
-    completed: boolean
-}
+// interface Todo {
+//     userId: number,
+//     id: number,
+//     title: string,
+//     completed: boolean
+// }
 
-type TodoList = Todo;
+// type TodoList = Todo;
 
-export const add = async () => {
-
+/*export const add = async () => {
 
 
     await krax<TodoList>({
         name: 'getTodos.ahmet[0].a',
         request: {
             url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
-            method:'GET',
+            method: 'GET',
             mode: 'cors',
             isJson: true,
-            // isFormWithFile: true,
-            // isFormWithoutFile: true,
+            isFile: true,
+            isForm: true,
             body: {
-                name: 'poklan'
+                name: 'poklan',
+                email: 'asdf',
+                files: []
             },
             headers: {
                 "Content-Tyasdape": "sdfsdfsdfsdf",
@@ -36,19 +37,19 @@ export const add = async () => {
             credentials: "same-origin"
         },
         // returnData: TodoList,
-        /*payload: {
+        /!*payload: {
             userId: 2342,
             id: 234234,
             title: 'sdfsdf',
             completed: false
-        },*/
+        },*!/
         confirm: {
             buttonYes: 'Onayla',
             buttonNo: 'Kapat',
             message: 'Bu işlemi yapmak istediğinize emin misiniz?',
             theme: 'success'
         },
-        /*request: {
+        /!*request: {
             url: 'http://localhost:4000/pages',
             method:'POST',
             body: {
@@ -56,9 +57,9 @@ export const add = async () => {
                 title: 'namer',
                 category: 'ahmet'
             }
-        },*/
-        onBefore: (/*state:any*/) => {
-            /*const mahmut = new Promise((resolve) => {
+        },*!/
+        onBefore: (/!*state:any*!/) => {
+            /!*const mahmut = new Promise((resolve) => {
                 setTimeout(() => {
                     resolve('onBefore setTimeout Ends.');
 
@@ -67,15 +68,15 @@ export const add = async () => {
                 console.log(result, state);
             })
 
-            return mahmut;*/
+            return mahmut;*!/
         },
-        onSuccess: (/*state:any*/) => {
+        onSuccess: (/!*state:any*!/) => {
             // baskaaction()
             //toastMessage({message: 'nabver', title: 'Başarılı', overlay: false, messageType:'error', theme:'light'})
             // console.log('SUCCESS', state);
 
         },
-        onError: (/*state:any, error:any*/) => {
+        onError: (/!*state:any, error:any*!/) => {
             // baskaaction()
             // console.log('!!', state, error);
 
@@ -83,7 +84,7 @@ export const add = async () => {
 
     })
 
-    /*await krax<TodoList>({
+    /!*await krax<TodoList>({
         name: 'getError',
         request: {
             url: 'https://api.github.com/repos/mehmetokanozcan/react-kraxs',
@@ -100,23 +101,23 @@ export const add = async () => {
                 toastMessage({message:'Başarılı'})
             }
         })
-    });*/
+    });*!/
 
-    /*await krax({
+    /!*await krax({
         reset: ['getError']
-    });*/
+    });*!/
 
     await krax<TodoList>({
         name: 'getTodos.ahmet[1]',
-        /*confirm: {
+        /!*confirm: {
             buttonYes: 'Onayla',
             buttonNo: 'Kapat',
             message: 'Bu işlemi yapmak istediğinize emin misiniz?',
             theme: 'success'
-        },*/
+        },*!/
         request: {
             url: 'http://localhost:4000/pages',
-            method:'POST',
+            method: 'POST',
             // isFormWithoutFile: true,
             // isFormWithFile: true,
             isJson: true,
@@ -126,8 +127,8 @@ export const add = async () => {
                 category: 'ahmet'
             }
         },
-        onSuccess : (_state) => {
-            toastMessage({message:'adsfasdasd'})
+        onSuccess: (_state) => {
+            toastMessage({message: 'adsfasdasd'})
         }
 
 
@@ -136,7 +137,7 @@ export const add = async () => {
 
     console.log('----GetState', getState())
 
-};
+};*/
 
 /*function baskaaction() {
     krax({
@@ -147,3 +148,18 @@ export const add = async () => {
         }*!/
     });
 }*/
+
+
+export const fileadd = (val:any) => {
+    krax({
+        name: 'ssss',
+        request: {
+            isFile: true,
+            url: 'http://localhost:4000/pages',
+            method: 'POST',
+            body: {
+                ...val
+            }
+        }
+    });
+}

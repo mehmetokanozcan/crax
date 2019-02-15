@@ -14,8 +14,8 @@ type KraxRequest = {
     signal?: AbortSignal | null,
     window?: any,
     isJson?: boolean,
-    isFormWithFile?: boolean,
-    isFormWithoutFile?: boolean
+    isFile?: boolean,
+    isForm?: boolean
 
     // contentType?: 'application/x-www-form-urlencoded; charset=UTF-8' | 'multipart/form-data' | 'application/json; charset=utf-8'
 }

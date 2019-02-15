@@ -1,17 +1,22 @@
 import * as React from 'react'
 import {connect} from './krax'
-import {add} from './example/add'
+import {/*add,*/ fileadd} from './example/add'
 
 class AppStore extends React.Component<{}, {}> {
 
     constructor(props, {}) {
         super(props);
+
+
+        this.state = {
+
+        }
     }
 
     componentDidMount() {
         // console.log('--->>>>>>', this.props)
 
-        add()
+        // add()
     }
 
 
@@ -21,12 +26,31 @@ class AppStore extends React.Component<{}, {}> {
         }
     }
 
+    onChange(e:any) {
+        // console.log('_-', e.target.files)
+
+        const a = {
+            text: 'asfasdfasdf'
+        }
+
+        fileadd({
+            ...e.target.files,
+            ...a
+        })
+    }
+
     render() {
 
         // console.log('Store----', this.props)
 
         return <>
-            <button onClick={() => add()}>add</button>
+            {/*<button onClick={() => add()}>add</button>*/}
+            <form>
+                <input type="file" multiple={true}
+                    onChange={(data:any) => this.onChange(data)}
+                />
+                <button type="submit">sdfasdf</button>
+            </form>
         </>;
     }
 }
