@@ -29,8 +29,8 @@ declare namespace Krax {
         signal?: AbortSignal | null,
         window?: any,
         isJson?: boolean,
-        isFormWithFile?: boolean,
-        isFormWithoutFile?: boolean
+        isFile?: boolean,
+        isForm?: boolean
     }
 
     export type Confirm = {
