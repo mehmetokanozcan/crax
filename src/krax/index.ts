@@ -1,6 +1,6 @@
 import './style.css';
 import {krax, kraxReset} from "./krax";
-import {kraxFetch} from "./krax-fetch";
+import {kraxFetch, kraxFetchOptions} from "./krax-fetch";
 import toastMessage from './message'
 import {getState, Provider, connect} from "./store"
 
@@ -11,6 +11,7 @@ export {
     Provider,
     connect,
     toastMessage,
-    kraxFetch
+    kraxFetch,
+    kraxFetchOptions
 }
 
