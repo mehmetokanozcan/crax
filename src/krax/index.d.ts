@@ -2,6 +2,8 @@
 // Project: [~OneFrameWeb~]
 // Definitions by: [~Mehmet Okan Ozcan & Mustafa Cihat Aykaş~] <[~https://github.com/mehmetokanozcan/react-krax~]>
 
+import {FetchOptions, KraxResponse} from "./types";
+
 export = Krax;
 
 declare namespace Krax {
@@ -12,6 +14,7 @@ declare namespace Krax {
     export function toastMessage(messageOptions: Message): Promise<{ confirm: boolean }>;
 
     export function krax<T>(options: Krax.ActionOptions<T>): Promise<Krax.KraxResponse<T>> & Promise<any>;
+    export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>>
 
     export type KraxRequest = {
         url: string,
