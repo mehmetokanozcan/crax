@@ -150,16 +150,13 @@ import {krax, /*toastMessage, getState*/} from '../krax'
 }*/
 
 
-export const fileadd = (val:any) => {
+export const fileadd = () => {
     krax({
         name: 'ssss',
         request: {
-            isFile: true,
-            url: 'http://localhost:4000/pages',
-            method: 'POST',
-            body: {
-                ...val
-            }
+            isJson: true,
+            url: 'https://pixage-one-api.apps-int.pcf.dev.kocsistem.com.tr/menu',
+            method: 'GET',
         }
     });
 }

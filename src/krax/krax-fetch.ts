@@ -8,7 +8,7 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
         fetch(options.url, omit(options,'url'))
             .then((response) => {
                 return {
-                    data: response.json(),
+                    data: response.ok ? response.json() : response,
                     ok: response.ok,
                     statusCode: response.status,
                     headers: response.headers
@@ -23,17 +23,14 @@ export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
                     headers,
                     error: responseData
                 };
-
-                resolve(kraxResponse);
+                if (ok) {
+                    resolve(kraxResponse);
+                } else {
+                    throw kraxResponse
+                }
             })
             .catch((error) => {
-                const kraxResponse: KraxResponse<T> = {
-                    ok: false,
-                    data: null,
-                    statusCode: 9999,
-                    error: error
-                };
-
+                const kraxResponse: KraxResponse<T> = error;
                 resolve(kraxResponse);
             })
     });

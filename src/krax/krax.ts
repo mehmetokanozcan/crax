@@ -25,7 +25,6 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             name: options.name
         });
 
-
         if (options.confirm && !isEmpty(options.confirm)) {
             await toastMessage({
                 message:'',
@@ -37,7 +36,6 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                 timeout: 10000000000
             });
         }
-
 
         if (request) {
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {

@@ -17,6 +17,7 @@ class AppStore extends React.Component<{}, {}> {
         // console.log('--->>>>>>', this.props)
 
         // add()
+        fileadd()
     }
 
 
@@ -26,18 +27,6 @@ class AppStore extends React.Component<{}, {}> {
         }
     }
 
-    onChange(e:any) {
-        // console.log('_-', e.target.files)
-
-        const a = {
-            text: 'asfasdfasdf'
-        }
-
-        fileadd({
-            ...e.target.files,
-            ...a
-        })
-    }
 
     render() {
 
@@ -45,12 +34,7 @@ class AppStore extends React.Component<{}, {}> {
 
         return <>
             {/*<button onClick={() => add()}>add</button>*/}
-            <form>
-                <input type="file" multiple={true}
-                    onChange={(data:any) => this.onChange(data)}
-                />
-                <button type="submit">sdfasdf</button>
-            </form>
+
         </>;
     }
 }
