@@ -17,10 +17,14 @@ const initialValue:ActionType = {
 export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
     const {request, payload, reset} = options;
     const { onSuccess, onError } = options;
+    let writeStore:boolean = true;
 
+    if (request && 'isWrite' in request) {
+        writeStore = request.isWrite || true
+    }
 
     const run = async () => {
-        if (request && request.isWrite) {
+        if (request && writeStore) {
             actions.set({
                 ...initialValue,
                 name: options.name
@@ -48,7 +52,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {
                 if (data.ok) {
                     // onSuccess
-                    if (request.isWrite) {
+                    if (writeStore) {
                         actions.set<ActionType>({
                             name: options.name,
                             loading: false,
@@ -65,7 +69,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
 
                 } else {
                     // onError
-                    if (request.isWrite) {
+                    if (writeStore) {
                         actions.set({
                             name: options.name,
                             loading: false,

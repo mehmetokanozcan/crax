@@ -1,6 +1,6 @@
 {
     "name": "react-krax",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "main": "lib/index.js",
     "keywords": [
         "react",
