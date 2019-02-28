@@ -20,10 +20,17 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
 
 
     const run = async () => {
-        actions.set({
-            ...initialValue,
-            name: options.name
-        });
+        if (request && request.isWrite) {
+            actions.set({
+                ...initialValue,
+                name: options.name
+            });
+        } else if (payload) {
+            actions.set({
+                ...initialValue,
+                name: options.name
+            });
+        }
 
         if (options.confirm && !isEmpty(options.confirm)) {
             await toastMessage({
@@ -41,34 +48,38 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {
                 if (data.ok) {
                     // onSuccess
-                    actions.set<ActionType>({
-                        name: options.name,
-                        loading: false,
-                        payload: data.data,
-                        headers: data.headers,
-                        ok: true,
-                        statusCode: data.statusCode
-                    }, (ok: any) => {
-                        if (ok) {
-                           onSuccess && onSuccess(getState());
-                        }
-                    });
+                    if (request.isWrite) {
+                        actions.set<ActionType>({
+                            name: options.name,
+                            loading: false,
+                            payload: data.data,
+                            headers: data.headers,
+                            ok: true,
+                            statusCode: data.statusCode
+                        }, (ok: any) => {
+                            if (ok) {
+                                onSuccess && onSuccess(getState());
+                            }
+                        });
+                    }
 
                 } else {
                     // onError
-                    actions.set({
-                        name: options.name,
-                        loading: false,
-                        payload: null,
-                        headers: data.headers,
-                        ok: false,
-                        error: data.error || '',
-                        statusCode: data.statusCode
-                    }, (ok: any) => {
-                        if (!ok) {
-                            onError && onError(getState(), data.error || '');
-                        }
-                    });
+                    if (request.isWrite) {
+                        actions.set({
+                            name: options.name,
+                            loading: false,
+                            payload: null,
+                            headers: data.headers,
+                            ok: false,
+                            error: data.error || '',
+                            statusCode: data.statusCode
+                        }, (ok: any) => {
+                            if (!ok) {
+                                onError && onError(getState(), data.error || '');
+                            }
+                        });
+                    }
                 }
                 return data;
             })

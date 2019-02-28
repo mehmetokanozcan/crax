@@ -155,8 +155,16 @@ export const fileadd = () => {
         name: 'ssss',
         request: {
             isJson: true,
-            url: 'https://pixage-one-api.apps-int.pcf.dev.kocsistem.com.tr/menu',
+            url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
+            isWrite: false,
             method: 'GET',
+
+        },
+        confirm: {
+            buttonYes: 'Onayla',
+            buttonNo: 'Kapat',
+            message: 'Bu işlemi yapmak istediğinize emin misiniz?',
+            theme: 'success'
         }
     });
 }

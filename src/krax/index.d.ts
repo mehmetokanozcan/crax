@@ -34,7 +34,8 @@ declare namespace Krax {
         window?: any,
         isJson?: boolean,
         isFile?: boolean,
-        isForm?: boolean
+        isForm?: boolean,
+        isWrite?: boolean
     }
 
     export type Confirm = {
