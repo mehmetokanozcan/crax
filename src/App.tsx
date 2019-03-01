@@ -24,7 +24,6 @@ class AppStore extends React.Component<{}, {}> {
 
 
     componentWillReceiveProps(props) {
-        console.log('Update props---->>', props)
         if (props !== this.props) {
             console.log('Update props---->>', props)
         }

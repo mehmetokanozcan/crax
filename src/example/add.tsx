@@ -155,7 +155,7 @@ export const fileadd = () => {
         name: 'ssss',
         request: {
             isJson: true,
-            url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
+            url: 'https://api.github.com/repos/mehmetokanozcan/react-ksrax',
             // isWriteToStore: true,
             method: 'GET',
 

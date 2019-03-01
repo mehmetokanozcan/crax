@@ -18,6 +18,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
     const {request, payload, reset} = options;
     const { onSuccess, onError } = options;
     let writeStore:boolean = true;
+    let confirmResult = true;
 
     if (request && request.hasOwnProperty('isWriteToStore') && !request.isWriteToStore) {
         writeStore = false
@@ -33,7 +34,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
         }
 
         if (options.confirm && !isEmpty(options.confirm)) {
-            await toastMessage({
+            confirmResult = await toastMessage({
                 message:'',
                 confirmMessage: options.confirm,
                 overlayClose: false,
@@ -41,10 +42,12 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
                 theme: options.confirm.theme,
                 messageType: options.confirm.theme,
                 timeout: 10000000000
+            }).then((status:any) => {
+                return status.confirm
             });
         }
 
-        if (request) {
+        if (request && confirmResult) {
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {
                 if (data.ok) {
                     // onSuccess
@@ -85,7 +88,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             })
         }
 
-        if (payload) {
+        if (payload && confirmResult) {
             return new Promise((resolve) => {
                 try {
                     actions.set({
@@ -127,7 +130,7 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
         console.warn("You did not specify neither request nor payload. You need to specify at least one of them.");
 
         return new Promise((resolve) => {
-            resolve(true);
+            resolve(confirmResult);
         })
     };
 
