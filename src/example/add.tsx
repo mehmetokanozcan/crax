@@ -151,12 +151,12 @@ import {krax, /*toastMessage, getState*/} from '../krax'
 
 
 export const fileadd = () => {
-    krax({
+    return krax({
         name: 'ssss',
         request: {
             isJson: true,
             url: 'https://api.github.com/repos/mehmetokanozcan/react-krax',
-            isWrite: false,
+            // isWriteToStore: true,
             method: 'GET',
 
         },

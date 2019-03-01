@@ -17,11 +17,14 @@ class AppStore extends React.Component<{}, {}> {
         // console.log('--->>>>>>', this.props)
 
         // add()
-        fileadd()
+        fileadd().then((val:any) => {
+            console.log('Val', val)
+        })
     }
 
 
     componentWillReceiveProps(props) {
+        console.log('Update props---->>', props)
         if (props !== this.props) {
             console.log('Update props---->>', props)
         }

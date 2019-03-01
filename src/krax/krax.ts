@@ -1,4 +1,4 @@
-import { /* get,  */isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 import { kraxFetch, kraxFetchOptions } from './krax-fetch';
 import { actions, getState } from './store'
 import { ActionOptions, KraxResponse, ActionType } from './types'
@@ -19,17 +19,13 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
     const { onSuccess, onError } = options;
     let writeStore:boolean = true;
 
-    if (request && 'isWrite' in request) {
-        writeStore = request.isWrite || true
+    if (request && request.hasOwnProperty('isWriteToStore') && !request.isWriteToStore) {
+        writeStore = false
     }
 
     const run = async () => {
-        if (request && writeStore) {
-            actions.set({
-                ...initialValue,
-                name: options.name
-            });
-        } else if (payload) {
+
+        if (writeStore) {
             actions.set({
                 ...initialValue,
                 name: options.name

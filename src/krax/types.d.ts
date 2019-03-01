@@ -16,7 +16,7 @@ type KraxRequest = {
     isJson?: boolean,
     isFile?: boolean,
     isForm?: boolean,
-    isWrite?: boolean
+    isWriteToStore?: boolean
 
     // contentType?: 'application/x-www-form-urlencoded; charset=UTF-8' | 'multipart/form-data' | 'application/json; charset=utf-8'
 }
