@@ -84,7 +84,6 @@ export function kraxFetchOptions(fetchParams: KraxRequest) {
 
         HEADERS = {
             headers: {
-                "Content-Type": "multipart/form-data",
                 ...(headers || {})
             }
         };
