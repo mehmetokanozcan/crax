@@ -126,6 +126,15 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             })
         }
 
+        if (options.confirm && !isEmpty(options.confirm)) {
+            return new Promise((resolve) => {
+                resolve({
+                    confirm: confirmResult
+                });
+            })
+
+        }
+
         console.warn("Houston! We have a problem.");
         console.warn("You did not specify neither request nor payload. You need to specify at least one of them.");
 
