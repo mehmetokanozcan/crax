@@ -1,7 +1,7 @@
 import { KraxRequest, KraxResponse, FetchOptions } from './types'
 import { toUpper, omit } from 'lodash'
 import * as fetch from 'isomorphic-fetch'
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
 
 export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>> {
     return new Promise<KraxResponse<T>>((resolve) => {
