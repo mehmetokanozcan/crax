@@ -2,7 +2,7 @@ import { isEmpty } from 'lodash'
 import { kraxFetch, kraxFetchOptions } from './krax-fetch';
 import { actions, getState } from './store'
 import { ActionOptions, KraxResponse, ActionType } from './types'
-import toastMessage from './message'
+// import toastMessage from './message'
 
 const initialValue:ActionType = {
     loading: true,
@@ -33,19 +33,19 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             });
         }
 
-        if (options.confirm && !isEmpty(options.confirm)) {
-            confirmResult = await toastMessage({
-                message:'',
-                confirmMessage: options.confirm,
-                overlayClose: false,
-                close: false,
-                theme: options.confirm.theme,
-                messageType: options.confirm.theme,
-                timeout: 10000000000
-            }).then((status:any) => {
-                return status.confirm
-            });
-        }
+        // if (options.confirm && !isEmpty(options.confirm)) {
+        //     confirmResult = await toastMessage({
+        //         message:'',
+        //         confirmMessage: options.confirm,
+        //         overlayClose: false,
+        //         close: false,
+        //         theme: options.confirm.theme,
+        //         messageType: options.confirm.theme,
+        //         timeout: 10000000000
+        //     }).then((status:any) => {
+        //         return status.confirm
+        //     });
+        // }
 
         if (request && confirmResult) {
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {

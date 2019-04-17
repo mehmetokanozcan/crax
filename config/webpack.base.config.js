@@ -79,10 +79,10 @@ const tsLoader = {
     ]
 };*/
 
-const cssLoader = {
-        test: /\.css$/,
-        use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
-    };
+// const cssLoader = {
+//         test: /\.css$/,
+//         use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
+//     };
 
 module.exports = {
 

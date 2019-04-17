@@ -1,7 +1,7 @@
-import './style.css';
+// import './style.css';
 import {krax, kraxReset} from "./krax";
 import {kraxFetch, kraxFetchOptions} from "./krax-fetch";
-import toastMessage from './message'
+// import toastMessage from './message'
 import {getState, Provider, connect} from "./store"
 
 export {
@@ -10,7 +10,7 @@ export {
     getState,
     Provider,
     connect,
-    toastMessage,
+    // toastMessage,
     kraxFetch,
     kraxFetchOptions
 }
