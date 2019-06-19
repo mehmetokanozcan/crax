@@ -15,7 +15,7 @@ declare namespace Krax {
 
     export function krax<T>(options: Krax.ActionOptions<T>): Promise<Krax.KraxResponse<T>> & Promise<any>;
     export function kraxFetch<T>(options: FetchOptions): Promise<KraxResponse<T>>;
-    export function kraxFetchOptions(fetchParams: KraxRequest);
+    export function kraxFetchOptions(fetchParams: KraxRequest): any;
 
     export type KraxRequest = {
         url: string,

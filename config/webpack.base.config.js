@@ -183,7 +183,8 @@ module.exports = {
         extractSASS,*/
         new webpack.NamedModulesPlugin(),
         new CopyWebpackPlugin([
-            { from: './src/krax/index.d.ts', to: './' }
+            { from: './src/krax/index.d.ts', to: './' },
+            { from: './src/krax/types.d.ts', to: './' }
         ]),
         hydrateEnvironmentConf(process.env.NODE_ENV),
     ],

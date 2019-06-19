@@ -1,6 +1,6 @@
 {
     "name": "react-krax",
-    "version": "0.0.28",
+    "version": "0.0.30",
     "main": "lib/index.js",
     "keywords": [
         "react",
@@ -22,7 +22,8 @@
         }
     ],
     "files": [
-        "lib/index.d.ts"
+        "lib/index.d.ts",
+        "lib/types.d.ts"
     ],
     "license": "MIT",
     "scripts": {
