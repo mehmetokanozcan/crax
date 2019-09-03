@@ -1,8 +1,8 @@
-import { /* get,  */isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 import { kraxFetch, kraxFetchOptions } from './krax-fetch';
 import { actions, getState } from './store'
 import { ActionOptions, KraxResponse, ActionType } from './types'
-import toastMessage from './message'
+// import toastMessage from './message'
 
 const initialValue:ActionType = {
     loading: true,
@@ -17,66 +17,78 @@ const initialValue:ActionType = {
 export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & Promise<any> {
     const {request, payload, reset} = options;
     const { onSuccess, onError } = options;
+    let writeStore:boolean = true;
+    let confirmResult = true;
 
+    if (request && request.hasOwnProperty('isWriteToStore') && !request.isWriteToStore) {
+        writeStore = false
+    }
 
     const run = async () => {
-        actions.set({
-            ...initialValue,
-            name: options.name
-        });
 
-
-        if (options.confirm && !isEmpty(options.confirm)) {
-            await toastMessage({
-                message:'',
-                confirmMessage: options.confirm,
-                overlayClose: false,
-                close: false,
-                theme: options.confirm.theme,
-                messageType: options.confirm.theme,
-                timeout: 10000000000
+        if (writeStore) {
+            actions.set({
+                ...initialValue,
+                name: options.name
             });
         }
 
+        // if (options.confirm && !isEmpty(options.confirm)) {
+        //     confirmResult = await toastMessage({
+        //         message:'',
+        //         confirmMessage: options.confirm,
+        //         overlayClose: false,
+        //         close: false,
+        //         theme: options.confirm.theme,
+        //         messageType: options.confirm.theme,
+        //         timeout: 10000000000
+        //     }).then((status:any) => {
+        //         return status.confirm
+        //     });
+        // }
 
-        if (request) {
+        if (request && confirmResult) {
             return kraxFetch<T>(kraxFetchOptions(request)).then((data) => {
                 if (data.ok) {
                     // onSuccess
-                    actions.set<ActionType>({
-                        name: options.name,
-                        loading: false,
-                        payload: data.data,
-                        headers: data.headers,
-                        ok: true,
-                        statusCode: data.statusCode
-                    }, (ok: any) => {
-                        if (ok) {
-                           onSuccess && onSuccess(getState());
-                        }
-                    });
+                    if (writeStore) {
+                        actions.set<ActionType>({
+                            name: options.name,
+                            loading: false,
+                            payload: data.data,
+                            headers: data.headers,
+                            ok: true,
+                            statusCode: data.statusCode
+                        }, (ok: any) => {
+                            if (ok) {
+                                onSuccess && onSuccess(getState());
+                            }
+                        });
+                    }
 
                 } else {
                     // onError
-                    actions.set({
-                        name: options.name,
-                        loading: false,
-                        payload: null,
-                        headers: data.headers,
-                        ok: false,
-                        error: data.error || '',
-                        statusCode: data.statusCode
-                    }, (ok: any) => {
-                        if (!ok) {
-                            onError && onError(getState(), data.error || '');
-                        }
-                    });
+                    if (writeStore) {
+                        actions.set({
+                            name: options.name,
+                            loading: false,
+                            payload: null,
+                            headers: data.headers,
+                            ok: false,
+                            error: data.error || '',
+                            statusCode: data.statusCode
+                        }, (ok: any) => {
+                            if (!ok) {
+                                onError && onError(getState(), data.error || '');
+                            }
+                        });
+                    }
                 }
                 return data;
             })
         }
 
-        if (payload) {
+        if (payload && confirmResult) {
             return new Promise((resolve) => {
                 try {
                     actions.set({
@@ -114,11 +126,20 @@ export function krax<T>(options: ActionOptions<T>): Promise<KraxResponse<T>> & P
             })
         }
 
+        if (options.confirm && !isEmpty(options.confirm)) {
+            return new Promise((resolve) => {
+                resolve({
+                    confirm: confirmResult
+                });
+            })
+
+        }
+
         console.warn("Houston! We have a problem.");
         console.warn("You did not specify neither request nor payload. You need to specify at least one of them.");
 
         return new Promise((resolve) => {
-            resolve(true);
+            resolve(confirmResult);
         })
     };
 

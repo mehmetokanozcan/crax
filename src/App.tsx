@@ -1,17 +1,25 @@
 import * as React from 'react'
 import {connect} from './krax'
-import {add} from './example/add'
+import {/*add,*/ fileadd} from './example/add'
 
 class AppStore extends React.Component<{}, {}> {
 
     constructor(props, {}) {
         super(props);
+
+
+        this.state = {
+
+        }
     }
 
     componentDidMount() {
         // console.log('--->>>>>>', this.props)
 
-        add()
+        // add()
+        fileadd().then((val:any) => {
+            console.log('Val', val)
+        })
     }
 
 
@@ -21,12 +29,14 @@ class AppStore extends React.Component<{}, {}> {
         }
     }
 
+
     render() {
 
         // console.log('Store----', this.props)
 
         return <>
-            <button onClick={() => add()}>add</button>
+            {/*<button onClick={() => add()}>add</button>*/}
+
         </>;
     }
 }

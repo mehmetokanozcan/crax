@@ -51,194 +51,20 @@
       "coverImage": "https://picsum.photos/200/300?image=0"
     },
     {
-      "id": 6,
-      "title": "Donec venenatis volutpat",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
+      "id": 6
     },
     {
-      "id": 7,
-      "title": "Quisque hendrerit",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
+      "id": 7
     },
     {
-      "id": 8,
-      "title": "Aenean et est lobortis",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
+      "id": 8
     },
     {
-      "id": 1,
-      "title": "Vestibulum ante ipsum primis in faucibus orci luctus",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 2,
-      "title": "Mauris id dui placerat, consequat",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 3,
-      "title": "Sed diam ligula, facilisis et vehicula",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 4,
-      "title": "Phasellus eget risus quis arcu elementum",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 5,
-      "title": "Sed ut nulla et mi posuere",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 6,
-      "title": "Donec venenatis volutpat",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 7,
-      "title": "Quisque hendrerit",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 8,
-      "title": "Aenean et est lobortis",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 1,
-      "title": "Vestibulum ante ipsum primis in faucibus orci luctus",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 2,
-      "title": "Mauris id dui placerat, consequat",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 3,
-      "title": "Sed diam ligula, facilisis et vehicula",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 4,
-      "title": "Phasellus eget risus quis arcu elementum",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 5,
-      "title": "Sed ut nulla et mi posuere",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 6,
-      "title": "Donec venenatis volutpat",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
-    },
-    {
-      "id": 7,
-      "title": "Quisque hendrerit",
-      "category": "Gallery",
-      "status": 1,
-      "design": true,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=0"
-    },
-    {
-      "id": 8,
-      "title": "Aenean et est lobortis",
-      "category": "Gallery",
-      "status": 0,
-      "design": false,
-      "createDate": "12 Temmuz",
-      "editDate": "15 Temmuz",
-      "coverImage": "https://picsum.photos/200/300?image=32"
+      "0": "[object File]",
+      "1": "[object File]",
+      "2": "[object File]",
+      "text": "asfasdfasdf",
+      "id": 9
     }
   ]
 }

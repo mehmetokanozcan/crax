@@ -79,10 +79,10 @@ const tsLoader = {
     ]
 };*/
 
-const cssLoader = {
-        test: /\.css$/,
-        use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
-    };
+// const cssLoader = {
+//         test: /\.css$/,
+//         use: ['style-loader', {loader: 'css-loader', options: {importLoaders: 1}}],
+//     };
 
 module.exports = {
 
@@ -183,7 +183,8 @@ module.exports = {
         extractSASS,*/
         new webpack.NamedModulesPlugin(),
         new CopyWebpackPlugin([
-            { from: './src/krax/index.d.ts', to: './' }
+            { from: './src/krax/index.d.ts', to: './' },
+            { from: './src/krax/types.d.ts', to: './' }
         ]),
         hydrateEnvironmentConf(process.env.NODE_ENV),
     ],

@@ -1,6 +1,6 @@
 {
     "name": "react-krax",
-    "version": "0.0.12",
+    "version": "0.0.31",
     "main": "lib/index.js",
     "keywords": [
         "react",
@@ -14,15 +14,11 @@
             "name": "Mehmet Okan Ozcan",
             "email": "mail@mehmetokanozcan.com",
             "url": "http://mehmetokanozcan.com/"
-        },
-        {
-            "name": "Mustafa Cihat Aykaş",
-            "email": "cihataykas@gmail.com",
-            "url": ""
         }
     ],
     "files": [
-        "lib/index.d.ts"
+        "lib/index.d.ts",
+        "lib/types.d.ts"
     ],
     "license": "MIT",
     "scripts": {
